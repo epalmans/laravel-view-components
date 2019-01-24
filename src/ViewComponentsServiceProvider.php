@@ -17,6 +17,11 @@ class ViewComponentsServiceProvider extends ServiceProvider
             'render',
             $this->app->make(CompileRenderDirective::class)
         );
+
+        Blade::directive(
+            'renderWhen',
+            $this->app->make(CompileRenderWhenDirective::class)
+        );
     }
 
     public function register()
