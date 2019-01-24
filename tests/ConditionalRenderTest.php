@@ -5,7 +5,7 @@ namespace Spatie\ViewComponents\Tests;
 class ConditionalRenderTest extends TestCase
 {
     /** @test */
-    public function it_renders_and_shows_a_component()
+    public function it_renders_a_component_from_a_classname()
     {
         $this->assertBladeCompilesTo(
             '<?php if(true): ?> <?php echo app(app(Spatie\ViewComponents\ComponentFinder::class)->find( Spatie\ViewComponents\Tests\Stubs\MyComponent::class), [])->toHtml(); ?> <?php endif; ?>',
@@ -14,10 +14,10 @@ class ConditionalRenderTest extends TestCase
     }
 
     /** @test */
-    public function it_renders_and_hides_a_component()
+    public function it_does_not_output_on_falsy_renderwhen()
     {
-        $this->assertBladeCompilesTo(
-            '<?php if(false): ?> <?php echo app(app(Spatie\ViewComponents\ComponentFinder::class)->find( Spatie\ViewComponents\Tests\Stubs\MyComponent::class), [])->toHtml(); ?> <?php endif; ?>',
+        $this->assertBladeOutputs(
+            '',
             '@renderWhen(false, Spatie\ViewComponents\Tests\Stubs\MyComponent::class)'
         );
     }

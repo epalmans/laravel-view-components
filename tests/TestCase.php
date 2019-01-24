@@ -19,4 +19,9 @@ abstract class TestCase extends Orchestra
     {
         $this->assertEquals($expected, Blade::compileString($template));
     }
+
+    protected function assertBladeOutputs(string $expected, string $template)
+    {
+        $this->assertEquals($expected, eval("?>{Blade::compileString($template)}<?php"));
+    }
 }
